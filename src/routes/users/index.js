@@ -68,9 +68,11 @@ userRouter.post("/login", async (req, res, next) => {
         const tokens = await authenticate(user)
         res.cookie("accessToken", tokens.accessToken, {
             httpOnly: true,
+            sameSite: "none",
         })
         res.cookie("refreshToken", tokens.refreshToken, {
             httpOnly: true,
+            sameSite: "none",
             path: "/users/refreshToken",
         })
         // res.send(tokens)
