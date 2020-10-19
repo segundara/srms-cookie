@@ -15,12 +15,35 @@ examRouter.post("/", authorize, async (req, res) => {
 
 // endpoint to view exam grades and other exam info
 examRouter.get("/:studentid", authorize, async (req, res) => {
-    const response = await db.query(`SELECT courses._id, courses.name, courses.description, courses.semester, exams.examdate, exams.grade
-                                     FROM exams JOIN "courses" ON exams.courseid = "courses"._id
-                                     WHERE studentid = $1
-                                     GROUP BY courses._id, courses.name, courses.description, courses.semester, exams.examdate, exams.grade
-                                     `, [req.params.studentid])
-    console.log(response.rows)
+    const sort = req.query.sort
+    const order = req.query.order
+    const offset = req.query.offset || 0
+    const limit = req.query.limit
+
+    delete req.query.sort
+    delete req.query.order
+    delete req.query.offset
+    delete req.query.limit
+
+    let query = `SELECT courses._id, courses.name, courses.description, courses.semester, exams.examdate, exams.grade
+                    FROM exams JOIN "courses" ON exams.courseid = "courses"._id `
+
+    const params = []
+    params.push(req.params.studentid)
+    query += `WHERE studentid = $${params.length} `
+    query += `GROUP BY courses._id, courses.name, courses.description, courses.semester, exams.examdate, exams.grade `
+
+    if (sort !== undefined)
+        query += `ORDER BY ${sort} ${order} `  //adding the sorting 
+
+    params.push(limit)
+    query += ` LIMIT $${params.length} `
+    params.push(offset)
+    query += ` OFFSET $${params.length}`
+    console.log(query)
+
+    const response = await db.query(query, params)
+    // console.log(response.rows)
     res.send({ count: response.rows.length, data: response.rows })
 })
 

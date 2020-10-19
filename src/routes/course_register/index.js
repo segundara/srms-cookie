@@ -41,17 +41,12 @@ registerRouter.get("/course_list/:studentid", authorize, async (req, res) => {
     delete req.query.limit
 
     let query = `SELECT courses._id, courses.name, courses.description, courses.semester, course_register.reg_date 
-    FROM "course_register" JOIN "courses" ON "course_register".courseid = "courses"._id `
+                    FROM "course_register" JOIN "courses" ON "course_register".courseid = "courses"._id `
 
     const params = []
     params.push(req.params.studentid)
     query += `WHERE studentid = $${params.length} `
     query += `GROUP BY courses._id, courses.name, courses.description, courses.semester, course_register.reg_date `
-    // const response = await db.query(`SELECT courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
-    //                                  FROM course_register JOIN "courses" ON course_register.courseid = "courses"._id
-    //                                  WHERE studentid = $1
-    //                                  GROUP BY courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
-    //                                  `, [req.params.studentid])
 
     if (sort !== undefined)
         query += `ORDER BY ${sort} ${order} `  //adding the sorting 
