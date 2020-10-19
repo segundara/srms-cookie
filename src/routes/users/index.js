@@ -121,9 +121,13 @@ userRouter.post("/refreshToken", async (req, res, next) => {
             const newTokens = await refreshToken(oldRefreshToken)
             res.cookie("accessToken", newTokens.accessToken, {
                 httpOnly: true,
+                sameSite: "none",
+                secure: true,
             })
             res.cookie("refreshToken", newTokens.refreshToken, {
                 httpOnly: true,
+                sameSite: "none",
+                secure: true,
                 path: "/users/refreshToken",
             })
             res.send("newTokens sent!")
