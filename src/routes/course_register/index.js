@@ -44,14 +44,8 @@ registerRouter.get("/course_list/:studentid", authorize, async (req, res) => {
     FROM "course_register" JOIN "courses" ON "course_register".courseid = "courses"._id `
 
     const params = []
-    for (queryParam in req.query) { //for each value in query string, I'll filter
-        params.push(req.params.studentid)
-
-        if (params.length === 1)
-            query += `WHERE studentid = $${params.length} `
-        // else
-        //     query += ` AND ${queryParam} = $${params.length} `
-    }
+    params.push(req.params.studentid)
+    query += `WHERE studentid = $${params.length} `
     query += `GROUP BY courses._id, courses.name, courses.description, courses.semester, course_register.reg_date `
     // const response = await db.query(`SELECT courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
     //                                  FROM course_register JOIN "courses" ON course_register.courseid = "courses"._id
