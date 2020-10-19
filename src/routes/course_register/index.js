@@ -41,7 +41,7 @@ registerRouter.get("/course_list/:studentid", authorize, async (req, res) => {
     delete req.query.limit
 
     let query = `SELECT courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
-                FROM course_register JOIN "courses" ON course_register.courseid = "courses"._id
+                FROM "course_register" JOIN "courses" ON "course_register".courseid = "courses"._id
                 WHERE studentid = ${req.params.studentid}
                 GROUP BY courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
                 `
