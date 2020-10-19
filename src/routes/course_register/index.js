@@ -40,10 +40,11 @@ registerRouter.get("/course_list/:studentid", authorize, async (req, res) => {
     delete req.query.offset
     delete req.query.limit
 
-    let query = `SELECT courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
+    let query = (`SELECT courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
                 FROM course_register JOIN "courses" ON course_register.courseid = "courses"._id
                 WHERE studentid = $1
-                GROUP BY courses._id, courses.name, courses.description, courses.semester, course_register.reg_date`
+                GROUP BY courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
+                `, [req.params.studentid])
 
     const params = []
     // for (queryParam in req.query) { //for each value in query string, I'll filter
@@ -64,7 +65,6 @@ registerRouter.get("/course_list/:studentid", authorize, async (req, res) => {
     if (sort !== undefined)
         query += `ORDER BY ${sort} ${order}`  //adding the sorting 
 
-    params.push([req.params.studentid])
     params.push(limit)
     query += ` LIMIT $${params.length} `
     params.push(offset)
