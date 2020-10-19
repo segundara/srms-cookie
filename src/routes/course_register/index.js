@@ -30,12 +30,45 @@ registerRouter.post("/", authorize, async (req, res) => {
 
 // endpoint for viewing registered course list, needed by student
 registerRouter.get("/course_list/:studentid", authorize, async (req, res) => {
-    const response = await db.query(`SELECT courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
-                                     FROM course_register JOIN "courses" ON course_register.courseid = "courses"._id
-                                     WHERE studentid = $1
-                                     GROUP BY courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
-                                     `, [req.params.studentid])
-    console.log(response.rows)
+    const sort = req.query.sort
+    const order = req.query.order
+    const offset = req.query.offset || 0
+    const limit = req.query.limit
+
+    delete req.query.sort
+    delete req.query.order
+    delete req.query.offset
+    delete req.query.limit
+
+    let query = `SELECT courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
+                FROM course_register JOIN "courses" ON course_register.courseid = "courses"._id`
+
+    const params = []
+    for (queryParam in req.query) { //for each value in query string, I'll filter
+        params.push(req.query[queryParam])
+
+        if (params.length === 1)
+            query += `WHERE studentid = $${params.length} `
+        // else
+        //     query += ` AND ${queryParam} = $${params.length} `
+    }
+    query += `GROUP BY courses._id, courses.name, courses.description, courses.semester, course_register.reg_date`
+    // const response = await db.query(`SELECT courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
+    //                                  FROM course_register JOIN "courses" ON course_register.courseid = "courses"._id
+    //                                  WHERE studentid = $1
+    //                                  GROUP BY courses._id, courses.name, courses.description, courses.semester, course_register.reg_date
+    //                                  `, [req.params.studentid])
+
+    if (sort !== undefined)
+        query += `ORDER BY ${sort} ${order}`  //adding the sorting 
+
+    params.push(limit)
+    query += ` LIMIT $${params.length} `
+    params.push(offset)
+    query += ` OFFSET $${params.length}`
+    console.log(query)
+
+    const response = await db.query(query, params)
     res.send({ count: response.rows.length, data: response.rows })
 })
 
