@@ -102,6 +102,7 @@ lecturerRouter.post("/register", authorize, onlyForAdmin, async (req, res, next)
     }
 })
 
+// Lecturer can send email to student
 lecturerRouter.post("/email/ToStudent", authorize, async (req, res, next) => {
     try {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
