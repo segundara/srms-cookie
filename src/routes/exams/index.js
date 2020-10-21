@@ -156,12 +156,41 @@ examRouter.get('/:studentid/pdf', authorize, async (req, res) => {
 
 // endpoint to get students list in a particular exam
 examRouter.get("/student_list/:courseid", authorize, forAllButStudent, async (req, res) => {
-    const response = await db.query(`SELECT students._id AS studentid, students.firstname, students.lastname, students.email, exams.examdate, exams.grade, exams._id
-                                     FROM exams JOIN "students" ON exams.studentid = "students"._id
-                                     WHERE courseid = $1
-                                     GROUP BY students._id, students.firstname, students.lastname, students.email, exams.examdate, exams.grade, exams._id
-                                     `, [req.params.courseid])
-    console.log(response.rows)
+    const sort = req.query.sort
+    const order = req.query.order
+    const offset = req.query.offset || 0
+    const limit = req.query.limit
+
+    delete req.query.sort
+    delete req.query.order
+    delete req.query.offset
+    delete req.query.limit
+
+    let query = `SELECT students._id AS studentid, students.firstname, students.lastname, students.email, exams.examdate, exams.grade, exams._id
+                    FROM exams JOIN "students" ON exams.studentid = "students"._id `
+
+    const params = []
+    params.push(req.params.courseid)
+    query += `WHERE courseid = $${params.length} `
+    query += `GROUP BY students._id, students.firstname, students.lastname, students.email, exams.examdate, exams.grade, exams._id `
+
+    if (sort !== undefined)
+        query += `ORDER BY ${sort} ${order} `  //adding the sorting 
+
+    params.push(limit)
+    query += ` LIMIT $${params.length} `
+    params.push(offset)
+    query += ` OFFSET $${params.length}`
+    console.log(query)
+
+    const response = await db.query(query, params)
+
+    // const response = await db.query(`SELECT students._id AS studentid, students.firstname, students.lastname, students.email, exams.examdate, exams.grade, exams._id
+    //                                  FROM exams JOIN "students" ON exams.studentid = "students"._id
+    //                                  WHERE courseid = $1
+    //                                  GROUP BY students._id, students.firstname, students.lastname, students.email, exams.examdate, exams.grade, exams._id
+    //                                  `, [req.params.courseid])
+    // console.log(response.rows)
     res.send({ count: response.rows.length, data: response.rows })
 })
 
