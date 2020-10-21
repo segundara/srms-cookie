@@ -102,6 +102,23 @@ lecturerRouter.post("/register", authorize, onlyForAdmin, async (req, res, next)
     }
 })
 
+lecturerRouter.post("/email/ToStudent", authorize, async (req, res, next) => {
+    try {
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        const msg = {
+            to: req.body.recipient,
+            from: req.body.sender,
+            subject: req.body.subject,
+            text: `${req.body.content}`
+        };
+        await sgMail.send(msg);
+
+        res.send('message sent!')
+    } catch (error) {
+        next(error)
+    }
+})
+
 // EXTRA) Using multer middleware to upload image
 const getFileName = (file) => file.originalname
 
