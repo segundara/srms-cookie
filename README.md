@@ -29,7 +29,7 @@
     <a href="https://github.com/segundara/srms-cookie"><strong>Explore the repo »</strong></a>
     <br />
     <br />
-    <a href="https://srms-ck-fe.herokuapp.com/">View Demo</a>
+    <a href="https://srms-fe.herokuapp.com/">View Demo</a>
     ·
     <a href="https://github.com/segundara/srms-cookie/issues">Report Bug</a>
   </p>
