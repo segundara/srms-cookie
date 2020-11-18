@@ -19,7 +19,7 @@ const {
   forbiddenHandler,
   badRequestHandler,
   genericErrorHandler,
-} = require("./errorHandlers");
+} = require("./routes/middlewares/errorHandlers");
 
 const server = express();
 
