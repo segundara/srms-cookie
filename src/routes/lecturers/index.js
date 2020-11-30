@@ -108,7 +108,8 @@ lecturerRouter.post("/email/ToStudent", authorize, async (req, res, next) => {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
             to: req.body.recipient,
-            from: req.body.sender,
+            from: 'segundara@gmail.com',
+            // from: req.body.sender,
             subject: req.body.subject,
             text: `${req.body.content}`
         };
