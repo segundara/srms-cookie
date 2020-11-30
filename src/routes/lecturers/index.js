@@ -83,7 +83,7 @@ lecturerRouter.post("/register", authorize, onlyForAdmin, async (req, res, next)
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
             to: newUser.rows[0].email,
-            from: 'srms@school.com',
+            from: 'srms.school.records@gmail.com',
             subject: 'School Account Created',
             text: `Hello ${newLecturer.rows[0].firstname} ${newLecturer.rows[0].lastname}, 
                     \nWe are happy to inform you that a page has been created for you on the school portal.
@@ -108,7 +108,7 @@ lecturerRouter.post("/email/ToStudent", authorize, async (req, res, next) => {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
             to: req.body.recipient,
-            from: 'segundara@gmail.com',
+            from: 'srms.school.records@gmail.com',
             // from: req.body.sender,
             subject: req.body.subject,
             text: `${req.body.content}`

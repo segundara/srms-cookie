@@ -82,7 +82,7 @@ studentRouter.post("/register", authorize, onlyForAdmin, async (req, res, next) 
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
             to: newUser.rows[0].email,
-            from: 'srms@school.com',
+            from: 'srms.school.records@gmail.com',
             subject: 'School Account Created',
             text: `Hello ${newStudent.rows[0].firstname} ${newStudent.rows[0].lastname}, 
                 \nWe are happy to inform you that a page has been created for you on the school portal.
