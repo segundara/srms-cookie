@@ -23,8 +23,8 @@ const {
 
 const server = express();
 
-const whitelist = ["http://localhost:3000"];
-// const whitelist = ["https://srms-fe.herokuapp.com"]
+// const whitelist = ["http://localhost:3000"];
+const whitelist = ["https://srms-fe.herokuapp.com"]
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
