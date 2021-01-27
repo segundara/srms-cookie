@@ -1,4 +1,5 @@
 
+[![Documentation][api-docs-shield]][api-docs-url]
 [![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
@@ -16,7 +17,7 @@
     <a href="https://github.com/segundara/srms-cookie"><strong>Explore the repo »</strong></a>
     <br />
     <br />
-    <a href="https://srms-fe.herokuapp.com/">View Demo</a>
+    <a href="https://srms-be.herokuapp.com/api-docs/">View Documentation</a>
     ·
     <a href="https://github.com/segundara/srms-cookie/issues">Report Bug</a>
   </p>
@@ -113,6 +114,8 @@ Project Link: [https://github.com/segundara/srms-cookie](https://github.com/segu
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[api-docs-shield]: https://img.shields.io/badge/api--docs-Documentation-blue
+[api-docs-url]: https://srms-be.herokuapp.com/api-docs/
 [issues-shield]: https://img.shields.io/github/issues/segundara/srms-cookie.svg?style=flat-square
 [issues-url]: https://github.com/segundara/srms-cookie/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
