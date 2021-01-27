@@ -1,25 +1,26 @@
 
 /**
  * @swagger
- * definitions:
- *  Admin:
- *   type: object
- *   properties:
- *    firstname:
- *     type: string
- *     description: firstname of the admin
- *    lastname:
- *     type: string
- *     description: lastname of the admin
- *    email:
- *     type: string
- *     description: email of the admin
- *    password:
- *     type: string
- *     description: password of the admin
- *    title:
- *     type: string
- *     example: 'admin'
+ * components:
+ *  schemas:
+ *   Admin:
+ *    type: object
+ *    properties:
+ *     firstname:
+ *      type: string
+ *      description: firstname of the admin
+ *     lastname:
+ *      type: string
+ *      description: lastname of the admin
+ *     email:
+ *      type: string
+ *      description: email of the admin
+ *     password:
+ *      type: string
+ *      description: password of the admin
+ *     title:
+ *      type: string
+ *      example: 'admin'
  */
 
 /**
@@ -34,7 +35,7 @@
  *    content:
  *     application/json:
  *      schema:
- *       $ref: '#/definitions/Admin'
+ *       $ref: '#/components/schemas/Admin'
  *   responses:
  *    200:
  *     description: New admin succesfully added

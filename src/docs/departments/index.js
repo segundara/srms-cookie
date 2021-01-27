@@ -1,13 +1,14 @@
 
 /**
  * @swagger
- * definitions:
- *  Department:
- *   type: object
- *   properties:
- *    name:
- *     type: string
- *     description: name of the department to be added
+ * components:
+ *  schemas:
+ *   Department:
+ *    type: object
+ *    properties:
+ *     name:
+ *      type: string
+ *      description: name of the department to be added
  */
 
 /**
@@ -22,7 +23,7 @@
 *    content:
 *     application/json:
 *      schema:
-*       $ref: '#/definitions/Department'
+*       $ref: '#/components/schemas/Department'
 *   responses:
 *    200:
 *     description: success

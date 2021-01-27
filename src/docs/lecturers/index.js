@@ -1,41 +1,42 @@
 
 /**
  * @swagger
- * definitions:
- *  Tutor:
- *   type: object
- *   properties:
- *    firstname:
- *     type: string
- *     description: firstname of the tutor
- *    lastname:
- *     type: string
- *     description: lastname of the tutor
- *    email:
- *     type: string
- *     description: email of the tutor
- *    password:
- *     type: string
- *     description: password of the tutor
- *    departmentid:
- *     type: string
- *     description: ID of the department that tutor will belong
- *     example: '975b2da8-390e-4341-957c-df3c553978a5'
- *    title:
- *     type: string
- *     example: 'tutor'
- *  Email:
- *   type: object
- *   properties:
- *    recipient:
- *     type: string
- *     description: email of the receiver
- *    subject:
- *     type: string
- *     description: subject of the email
- *    content:
- *     type: string
- *     description: content of the email
+ * components:
+ *  schemas:
+ *   Tutor:
+ *    type: object
+ *    properties:
+ *     firstname:
+ *      type: string
+ *      description: firstname of the tutor
+ *     lastname:
+ *      type: string
+ *      description: lastname of the tutor
+ *     email:
+ *      type: string
+ *      description: email of the tutor
+ *     password:
+ *      type: string
+ *      description: password of the tutor
+ *     departmentid:
+ *      type: string
+ *      description: ID of the department that tutor will belong
+ *      example: '975b2da8-390e-4341-957c-df3c553978a5'
+ *     title:
+ *      type: string
+ *      example: 'tutor'
+ *   Email:
+ *    type: object
+ *    properties:
+ *     recipient:
+ *      type: string
+ *      description: email of the receiver
+ *     subject:
+ *      type: string
+ *      description: subject of the email
+ *     content:
+ *      type: string
+ *      description: content of the email
  */
 
 /**
@@ -50,7 +51,7 @@
  *    content:
  *     application/json:
  *      schema:
- *       $ref: '#/definitions/Tutor'
+ *       $ref: '#/components/schemas/Tutor'
  *   responses:
  *    200:
  *     description: New tutor succesfully added
@@ -98,7 +99,7 @@
  *    content:
  *     application/json:
  *      schema:
- *       $ref: '#/definitions/Email'
+ *       $ref: '#/components/schemas/Email'
  *   responses:
  *    200:
  *     description: success

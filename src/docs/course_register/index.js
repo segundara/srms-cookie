@@ -1,26 +1,27 @@
 
 /**
  * @swagger
- * definitions:
- *  CourseRegister:
- *   type: object
- *   properties:
- *    courseid:
- *     type: string
- *     description: ID of the course
- *     example: '371a094a-f7a0-43a6-aa8f-86d0af414e82'
- *    studentid:
- *     type: string
- *     description: ID of the student
- *     example: 'cea590b2-b114-44c2-b789-711afa823da6'
- *    reg_date:
- *     type: string
- *     description: date of registration for the course
- *     example: 'YYYY-MM-DD'
- *    examdate:
- *     type: string
- *     description: date of exam
- *     example: 'YYYY-MM-DD'
+ * components:
+ *  schemas:
+ *   CourseRegister:
+ *    type: object
+ *    properties:
+ *     courseid:
+ *      type: string
+ *      description: ID of the course
+ *      example: '371a094a-f7a0-43a6-aa8f-86d0af414e82'
+ *     studentid:
+ *      type: string
+ *      description: ID of the student
+ *      example: 'cea590b2-b114-44c2-b789-711afa823da6'
+ *     reg_date:
+ *      type: string
+ *      description: date of registration for the course
+ *      example: 'YYYY-MM-DD'
+ *     examdate:
+ *      type: string
+ *      description: date of exam
+ *      example: 'YYYY-MM-DD'
  */
 
 /**
@@ -35,7 +36,7 @@
  *    content:
  *     application/json:
  *      schema:
- *       $ref: '#/definitions/CourseRegister'
+ *       $ref: '#/components/schemas/CourseRegister'
  *   responses:
  *    200:
  *     description: course registration successful

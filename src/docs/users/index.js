@@ -1,18 +1,17 @@
 
 /**
  * @swagger
- * definitions:
- *  User:
- *   type: object
- *   properties:
- *    email:
- *     type: string
- *     description: email of the user
- *     example: 'jani@email.com'
- *    password:
- *     type: string
- *     description: password of the user
- *     example: 'jani'
+ * components:
+ *  schemas:
+ *   User:
+ *    type: object
+ *    properties:
+ *     email:
+ *      type: string
+ *      description: email of the user
+ *     password:
+ *      type: string
+ *      description: password of the user
  */
 
 /**
@@ -27,7 +26,20 @@
  *    content:
  *     application/json:
  *      schema:
- *       $ref: '#/definitions/User'
+ *       $ref: '#/components/schemas/User'
+ *      examples:
+ *       as_student:
+ *        value:
+ *         email: jani@email.com
+ *         password: jani
+ *       as_tutor:
+ *        value:
+ *         email: perti@email.com
+ *         password: pertipuhaka
+ *       as_admin:
+ *        value:
+ *         email: segun@email.com
+ *         password: segunoke
  *   responses:
  *    200:
  *     description: login succesfully

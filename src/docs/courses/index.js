@@ -1,26 +1,27 @@
 
 /**
  * @swagger
- * definitions:
- *  Course:
- *   type: object
- *   properties:
- *    name:
- *     type: string
- *     description: name of the course
- *    description:
- *     type: string
- *     description: description of the course
- *    semester:
- *     type: string
- *     description: semester that the course will be thaught
- *    lecturerid:
- *     type: string
- *     description: ID of the lecturer that will be in-charge
- *     example: 'dabe3a0d-ae43-4bfa-9a00-ed1991ef42db'
- *    examdate:
- *     type: string
- *     example: 'YYYY-MM-DD'
+ * components:
+ *  schemas:
+ *   Course:
+ *    type: object
+ *    properties:
+ *     name:
+ *      type: string
+ *      description: name of the course
+ *     description:
+ *      type: string
+ *      description: description of the course
+ *     semester:
+ *      type: string
+ *      description: semester that the course will be thaught
+ *     lecturerid:
+ *      type: string
+ *      description: ID of the lecturer that will be in-charge
+ *      example: 'dabe3a0d-ae43-4bfa-9a00-ed1991ef42db'
+ *     examdate:
+ *      type: string
+ *      example: 'YYYY-MM-DD'
  */
 
 /**
@@ -35,7 +36,7 @@
  *    content:
  *     application/json:
  *      schema:
- *       $ref: '#/definitions/Course'
+ *       $ref: '#/components/schemas/Course'
  *   responses:
  *    200:
  *     description: New course succesfully added
@@ -106,8 +107,8 @@
  *  get:
  *   tags:
  *   - "course"
- *   summary: get the details of a course being managed by a particular lecturer
- *   description: get the details of a course being managed by a particular lecturer
+ *   summary: get the details of course(s) being managed by a particular lecturer
+ *   description: get the details of course(s) being managed by a particular lecturer
  *   parameters:
  *    - in: path
  *      name: lecturerid
