@@ -56,7 +56,7 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions);
 console.log(swaggerDocs)
 server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
-const whitelist = ["https://srms-fe.herokuapp.com"]
+const whitelist = ["https://srms-fe.herokuapp.com", "https://srms-be.herokuapp.com"]
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
