@@ -14,6 +14,9 @@ const userRouter = require("./routes/users");
 const listEndpoints = require("express-list-endpoints");
 const cookieParser = require("cookie-parser");
 
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+
 const {
   notFoundHandler,
   forbiddenHandler,
@@ -23,8 +26,38 @@ const {
 
 const server = express();
 
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'School Record System API',
+      version: '1.0.0',
+      description: 'Documentation for school record system API',
+      contact: {
+        name: 'segundara',
+        url: 'https://segundara.github.io/',
+        email: 'segundara@gmail.com'
+      },
+      servers: ["http://localhost:4234", "https://srms-be.herokuapp.com"]
+    }
+  },
+  apis: [
+    "./src/docs/users/index.js",
+    "./src/docs/students/index.js",
+    "./src/docs/lecturers/index.js",
+    "./src/docs/admin/index.js",
+    "./src/docs/departments/index.js",
+    "./src/docs/courses/index.js",
+    "./src/docs/course_register/index.js",
+    "./src/docs/exams/index.js"
+  ]
+}
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+console.log(swaggerDocs)
+server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
 // const whitelist = ["http://localhost:3000"];
-const whitelist = ["https://srms-fe.herokuapp.com"]
+const whitelist = ["https://srms-fe.herokuapp.com", "http://localhost:4234"]
 // const whitelist = ["https://srms-ck-fe.herokuapp.com"]
 const corsOptions = {
   origin: (origin, callback) => {

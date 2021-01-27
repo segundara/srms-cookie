@@ -40,6 +40,8 @@
     "pdfmake": "^0.1.68",
     "pg": "^8.5.1",
     "roboto-font": "^0.1.0",
+    "swagger-jsdoc": "^6.0.1",
+    "swagger-ui-express": "^4.1.6",
     "validator": "^13.1.17"
   }
 }

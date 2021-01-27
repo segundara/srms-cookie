@@ -39,6 +39,24 @@ const onlyForAdmin = async (req, res, next) => {
   }
 }
 
+const onlyForStudent = async (req, res, next) => {
+  if (req.user && req.user.title === "student") next()
+  else {
+    const err = new Error("Only for student!")
+    err.httpStatusCode = 403
+    next(err)
+  }
+}
+
+const onlyForTutor = async (req, res, next) => {
+  if (req.user && req.user.title === "tutor") next()
+  else {
+    const err = new Error("Only for tutor!")
+    err.httpStatusCode = 403
+    next(err)
+  }
+}
+
 const forAllButStudent = async (req, res, next) => {
   if (req.user && req.user.title === "admin" || req.user && req.user.title === "tutor") next()
   else {
@@ -48,4 +66,4 @@ const forAllButStudent = async (req, res, next) => {
   }
 }
 
-module.exports = { authorize, onlyForAdmin, forAllButStudent }
+module.exports = { authorize, onlyForAdmin, onlyForStudent, onlyForTutor, forAllButStudent }

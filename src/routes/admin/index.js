@@ -59,7 +59,7 @@ adminRouter.get("/", authorize, onlyForAdmin, async (req, res, next) => {
   }
 });
 
-adminRouter.get("/me", authorize, async (req, res, next) => {
+adminRouter.get("/me", authorize, onlyForAdmin, async (req, res, next) => {
   try {
     const getMe = await db.query('SELECT * FROM "admin" WHERE email= $1', [
       req.user.email,

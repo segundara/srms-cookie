@@ -2,7 +2,7 @@ const express = require("express")
 const db = require("../../db")
 const multer = require("multer")
 const bcrypt = require("bcrypt")
-const { authorize, onlyForAdmin } = require("../middlewares/authorize")
+const { authorize, onlyForTutor, onlyForAdmin } = require("../middlewares/authorize")
 const sgMail = require("@sendgrid/mail")
 
 const { BlobServiceClient, StorageSharedKeyCredential, BlobLeaseClient } = require("@azure/storage-blob")
@@ -56,7 +56,7 @@ lecturerRouter.get("/", authorize, async (req, res, next) => {
     }
 })
 
-lecturerRouter.get("/me", authorize, async (req, res, next) => {
+lecturerRouter.get("/me", authorize, onlyForTutor, async (req, res, next) => {
     try {
         const getMe = await db.query('SELECT * FROM "lecturers" WHERE email= $1',
             [req.user.email])
