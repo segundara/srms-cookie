@@ -20,7 +20,7 @@
  *  post:
  *   tags:
  *   - "users"
- *   summary: login into the system required
+ *   summary: login into the system required (Select from the sample login details included)
  *   description: Signin required before user can access the system
  *   requestBody:
  *    content:
