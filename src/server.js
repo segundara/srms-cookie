@@ -52,9 +52,12 @@ const swaggerOptions = {
     "./src/docs/exams/index.js"
   ]
 }
+var options = {
+  customCss: '.swagger-ui .topbar { display: none }'
+};
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
 console.log(swaggerDocs)
-server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs, options));
 
 const whitelist = ["https://srms-fe.herokuapp.com", "https://srms-be.herokuapp.com", "http://localhost:4234"]
 const corsOptions = {
