@@ -59,7 +59,7 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions);
 console.log(swaggerDocs)
 server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs, options));
 
-const whitelist = ["https://srms-fe.herokuapp.com", "https://srms-be.herokuapp.com", "https://cloudy-blue-lion.cyclic.app", "http://localhost:4234"]
+const whitelist = ["https://srms-fe.herokuapp.com", "https://srms-be.herokuapp.com", "https://cloudy-blue-lion.cyclic.app", "http://localhost:4234", "http://localhost:3000"]
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
