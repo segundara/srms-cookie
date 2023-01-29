@@ -13,6 +13,9 @@ const credentials = new StorageSharedKeyCredential("srmscdn", process.env.STORAG
 
 const studentRouter = express.Router();
 
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
 studentRouter.get("/", authorize, async (req, res, next) => {
     try {
         const sort = req.query.sort
@@ -100,22 +103,38 @@ studentRouter.post("/register", authorize, onlyForAdmin, async (req, res, next) 
     }
 })
 
-// EXTRA) Using multer middleware to upload image
-const getFileName = (file) => file.originalname
+// // EXTRA) Using multer middleware to upload image
+// const getFileName = (file) => file.originalname
 
-const multerOptions = multer({
-    storage: new MulterAzureStorage({
-        azureStorageConnectionString: process.env.STORAGE_CS,
-        containerName: 'images',
-        containerSecurity: 'container',
-        fileName: getFileName
-    })
-})
+// const multerOptions = multer({
+//     storage: new MulterAzureStorage({
+//         azureStorageConnectionString: process.env.STORAGE_CS,
+//         containerName: 'images',
+//         containerSecurity: 'container',
+//         fileName: getFileName
+//     })
+// })
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+      folder: "DEV",
+    },
+});
+
+const multerOptions = multer({ storage: storage });
 
 studentRouter.post("/upload/me", authorize, multerOptions.single("file"), async (req, res, next) => {
     try {
         let params = []
-        let query = `UPDATE "students" SET image = '${req.file.url}'`
+        // let query = `UPDATE "students" SET image = '${req.file.url}'`
+        let query = `UPDATE "students" SET image = '${req.file.path}'`
 
         params.push(req.user.email)
         query += " WHERE email = $" + (params.length) + " RETURNING *"
