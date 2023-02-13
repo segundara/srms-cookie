@@ -47,8 +47,8 @@ courseRouter.get("/:lecturerid", authorize, forAllButStudent, async (req, res) =
     const response = await db.query('SELECT * FROM "courses" WHERE lecturerid= $1',
         [req.params.lecturerid])
 
-    if (response.rowCount === 0)
-        return res.status(404).send("Not found")
+    // if (response.rowCount === 0)
+    //     return res.status(404).send("Not found")
 
     res.send(response.rows)
 })
